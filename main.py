@@ -11,18 +11,18 @@ def getTime():
 
 
 def loadToList():
-    print('Начинаю загрузку URL из файла')
+    print('Loading URLs from file')
     urls = []
     fileToRead = open("urls.txt", "r")
     for line in fileToRead:
         urls.append(line.strip())
     fileToRead.close()
-    print(f'Загрузка завершена! Всего загружено: {len(urls)}')
+    print(f'Loaded! Files loaded: {len(urls)}')
     return urls
 
 
 def download():
-    print(f'Начинаю скачивание {len(URLS)} объектов')
+    print(f'Downloading {len(URLS)} objects')
     i = 0
     while i < len(URLS):
         img = urllib.request.urlopen(URLS[i]).read()
@@ -30,7 +30,7 @@ def download():
         out.write(img)
         out.close()
         i += 1
-        print(f'Скачал {i} из {len(URLS)}')
+        print(f'Downloaded {i} from {len(URLS)}')
 
 
 if __name__ == '__main__':
