@@ -6,6 +6,7 @@ charset-normalizer==2.0.12
 idna==3.3
 requests==2.27.1
 urllib3==1.26.8
+uuid==1.30
 
 How to use:
 1. Add URL's to urls.txt
