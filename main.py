@@ -1,39 +1,33 @@
-import datetime
-import urllib.request
-
-URLS = []
+from logger import timestamp, event_builder
+from func import download_file
 
 
-def getTime():
-    now = datetime.datetime.now()
-    current_time = now.strftime("%H_%M_%S")
-    return current_time
-
-
-def loadToList():
-    print('Loading URLs from file')
-    urls = []
-    fileToRead = open("urls.txt", "r")
-    for line in fileToRead:
-        urls.append(line.strip())
-    fileToRead.close()
-    print(f'Loaded! Files loaded: {len(urls)}')
-    return urls
-
-
-def download():
-    print(f'Downloading {len(URLS)} objects')
+def load_to_list():
+    _urls = []
+    event_builder(timestamp() + 'Loading URLs from file')
     i = 0
-    while i < len(URLS):
-        img = urllib.request.urlopen(URLS[i]).read()
-        out = open(f"IMG\IMG_{getTime()}.jpg","wb")
-        out.write(img)
-        out.close()
-        i += 1
-        print(f'Downloaded {i} from {len(URLS)}')
+    try:
+        file_to_read = open("urls.txt", "r")
+        for line in file_to_read:
+            _urls.append(line.strip())
+        file_to_read.close()
+    except:
+        event_builder(timestamp() + 'Error while loading URLs!')
+    finally:
+        event_builder(timestamp() + f'Loaded URLs!')
+        return _urls
+
+
+def download(urls):
+    event_builder(timestamp() + f'Downloading {len(urls)} objects')
+    i = 0
+    try:
+        for link in urls:
+            i = download_file(link, i, len(urls))
+    finally:
+        event_builder(timestamp() + f'Downloaded {len(urls)} files!')
 
 
 if __name__ == '__main__':
-    URLS = loadToList()
-    download()
-
+    urls = load_to_list()
+    download(urls)
