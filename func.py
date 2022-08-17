@@ -21,4 +21,4 @@ def download_file(url, i, length):
 
 
 def read_file():
-    print('HUI')
+    print('0')
