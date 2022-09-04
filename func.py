@@ -18,7 +18,3 @@ def download_file(url, i, length):
     finally:
         event_builder(timestamp() + f'Downloaded {i} of {length}')
         return i
-
-
-def read_file():
-    print('0')
